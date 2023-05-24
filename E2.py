@@ -8,20 +8,20 @@ data_entrenamiento = './dataset/train'
 data_validacion = './dataset/validation'
 
 # Parámetros
-epocas = 20
-altura, longitud = 100, 100
-batch_size = 32
-pasos = 1000
-pasos_validacion = 200
-filtrosC1 = 32
-filtrosC2 = 64
-tamano_filtro1 = (3, 3)
-tamano_filtro2 = (2, 2)
+epocas = 40 #Número de iteraciones sobre el set de datos
+altura, longitud = 100, 100 #Ajuste de tamaño de las imagenes
+batch_size = 32  #numero de imagenes a procesor en cada paso
+pasos = 50 #numero de veces que se procesa la informacion de cada epoca
+pasos_validacion = 15 #al final de cada epoca tmabien se verificara el set de validacion
+filtrosC1 = 32 #Dspues de cada convolucion tendra una profundidad de 32 pixeles
+filtrosC2 = 64 #
+tamano_filtro1 = (3, 3) #ira en un tamaño de 3*3
+tamano_filtro2 = (2, 2) #
 tamano_pool = (2, 2)
-clases = 36
-lr = 0.0005
+clases = 36 #numero de clases que tenemos en nuestro dataset
+lr = 0.001 #Taza de aprendizaje de la red neuronal
 
-# Preprocesamiento de imágenes
+# Preprocesamiento de imágenes, escalado, generar imagenes inclinadas, zoom, voltea las imagenes
 entrenamiento_datagen = tf.keras.preprocessing.image.ImageDataGenerator(
     rescale=1./255,
     shear_range=0.3,
@@ -37,7 +37,7 @@ validacion_datagen = tf.keras.preprocessing.image.ImageDataGenerator(
 imagen_entrenamiento = entrenamiento_datagen.flow_from_directory(
     data_entrenamiento,
     target_size=(altura, longitud),
-    batch_size=batch_size,
+    batch_size=batch_size,  
     class_mode='categorical'
 )
 
